@@ -3,7 +3,7 @@ node {
     withMaven(maven:'maven') {
 
         stage('Checkout') {
-            git url: 'https://github.com/saurabh0010/sample-spring-microservices.git'
+            git url: 'https://github.com/mattjamese/customer-service.git'
         }
 
         stage('Build') {
@@ -15,10 +15,10 @@ node {
         }
 
         stage('Image') {
-            dir ('customer-service') {
+            //dir ('customer-service') {
                 def app = docker.build "localhost:5000/customer-service:${env.version}"
                 app.push()
-            }
+            //}
         }
 
         stage ('Run') {
