@@ -22,7 +22,8 @@ node {
         }
 
         stage ('Run') {
-            docker.image("localhost:5000/customer-service:${env.version}").run('-p 3333:3333 -h customer --name customer --link discovery --link account')
+            //docker.image("localhost:5000/customer-service:${env.version}").run('-p 3333:3333 -h customer --name customer --link discovery --link account')
+            docker.image("localhost:5000/customer-service:${env.version}").run('-p 3333:3333 -h customer --name customer')
         }
 
         stage ('Final') {
