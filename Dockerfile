@@ -1,6 +1,5 @@
 FROM openjdk:8-jdk-alpine
 VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} customer-service.jar
-ENTRYPOINT ["java","-jar","/customer-service.jar"]
+ADD target/customer-service-0.1.jar customer-service.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/customer-service.jar"]
 EXPOSE 3333

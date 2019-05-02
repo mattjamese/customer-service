@@ -13,6 +13,18 @@ node {
             print pom.version
             env.version = pom.version
         }
+        
+        /*stage('RemoveOldContainers'){	    
+    	    script {
+				  try {
+				      sh 'docker rm -f customer'
+				  } catch (Exception e) {
+				     
+				      build job: 'Image'
+				  }
+			}				     
+		}*/
+        
 
         stage('Image') {
             //dir ('customer-service') {
@@ -22,8 +34,7 @@ node {
         }
 
         stage ('Run') {
-            //docker.image("localhost:5000/customer-service:${env.version}").run('-p 3333:3333 -h customer --name customer --link discovery --link account')
-            docker.image("localhost:5000/customer-service:${env.version}").run('-p 3333:3333 -h customer --name customer')
+            docker.image("localhost:5000/customer-service:${env.version}").run('-p 3333:3333 -h customer --name customer --link discovery --link account')
         }
 
         stage ('Final') {
